@@ -8,7 +8,7 @@ import datetime, random
 
 
 def get_birthdays(number_of_birthdays):
-    '''Returns a list of number random date objects for birthdays.'''
+    '''Returns a list of a number of random date objects for birthdays.'''
     birthdays = []
     # The year is unimportant for our simulation, as long as all
     # birthdays have the same year.
@@ -34,7 +34,7 @@ def get_match(birthdays):
 
 def set_full_month(birthday):
     '''Converts the abbreviated str to a full str'''
-    date_text = birthday.strftime('%B %#d')
+    date_text = f'{birthday:%B %#d}'
     return date_text
 
 # Display the intro:
@@ -112,7 +112,7 @@ for i in range(100_000):
         sim_match += 1
 print('100,000 simulations run.')
 
-# Display simulation resutls:
+# Display simulation results:
 probability = round(sim_match / 100_000 * 100, 2)
 print(f'Out of 100,000 simulations of {number_bdays} people, there was a')
 print(f'matching birthday in that group {sim_match} times. This means')
