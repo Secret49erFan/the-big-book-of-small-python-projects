@@ -1,5 +1,5 @@
 ''' Birthday Paradox Simulation, By Al Sweigart al@inventwithpython.com
-Explore the surprising probabilities of the "Brithday Paradox."
+Explore the surprising probabilities of the "Birthday Paradox."
 More info at https://en.wikipedia.org/wiki/Birthday_problem.
 View this code at https://nostarch.com/big-book-small-python-projects.
 Tags: short, math, simulation'''
@@ -10,29 +10,15 @@ import datetime, random
 def get_birthdays(number_of_birthdays):
     '''Returns a list of number random date objects for birthdays.'''
     birthdays = []
+    # The year is unimportant for our simulation, as long as all
+    # birthdays have the same year.
+    start_of_year = datetime.date(2001, 1, 1)
     for i in range(number_of_birthdays):
-        # The year is unimportant for our simulation, as long as all
-        # birthdays have the same year.
-        start_of_year = datetime.date(2001, 1, 1)
-
         # Get a random day into the year.
         random_number_of_days = datetime.timedelta(random.randint(0, 364))
         birthday = start_of_year + random_number_of_days
         birthdays.append(birthday)
     return birthdays
-
-
-def get_match_old(birthdays):
-    '''Returns the date object of a birthday that occurs more than once
-       in the birhday list.'''
-    if len(birthdays) == len(set(birthdays)):
-        return None # All birthdays are unique, so return None.
-    
-    # Compare each birthday to every other birthday.
-    for a, birthday_a in enumerate(birthdays):
-        for b, birthday_b in enumerate(birthdays[a + 1 :]):
-            if birthday_a == birthday_b:
-                return birthday_a # Return the matching birthday.
             
 def get_match(birthdays):
     '''Returns a set of date objects of birthdays that occurs more than once
@@ -47,7 +33,7 @@ def get_match(birthdays):
     return dupes # empty set if no dupes
 
 def set_full_month(birthday):
-    '''Converts the abriviated str to a full str'''
+    '''Converts the abbreviated str to a full str'''
     date_text = birthday.strftime('%B %#d')
     return date_text
 
@@ -103,10 +89,10 @@ else:
 print()
 
 # Run through 100,000 simulations.
-print(f'Generating {number_bdays} random birthdays 100,000 times...')
+print(f'Generating {number_bdays} random birthdays,')
 input('Press enter to begin...')
 
-print("Let's run another 100,000 simulations.")
+print("Let's run 100,000 simulations.")
 sim_match = 0 # How many simulations had matching birthdays in them.
 bd_match = 0
 for i in range(100_000):
@@ -115,7 +101,7 @@ for i in range(100_000):
         print(i, 'simulations run...')
     birthdays = get_birthdays(number_bdays)
     
-    if datetime.date(2001, 4, 24) in birthdays:
+    if datetime.date(2001, 5, 11) in birthdays:
         bd_match += 1
             # print(f'Ding! {birthday} in simulation #{i}')
     
@@ -126,7 +112,7 @@ for i in range(100_000):
         sim_match += 1
 print('100,000 simulations run.')
 
-# Display simualation resutls:
+# Display simulation resutls:
 probability = round(sim_match / 100_000 * 100, 2)
 print(f'Out of 100,000 simulations of {number_bdays} people, there was a')
 print(f'matching birthday in that group {sim_match} times. This means')
