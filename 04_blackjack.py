@@ -292,6 +292,7 @@ def check_for_blackjack(dealer_hand, player_hand):
         print('The dealer has blackjack.')
         return True
     else:
+        print('The dealer does not have blackjack.')
         return False
     
 
