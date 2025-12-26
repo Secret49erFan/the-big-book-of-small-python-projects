@@ -29,6 +29,9 @@ if WIDTH % 2 == 0:
     WIDTH -= 1
 
 NUMBER_OF_LOGOS = 5
+
+NUMBER_OF_RAINDROPS = 7
+
 PAUSE_AMOUNT = 0.2
 
 COLORS = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
@@ -39,7 +42,7 @@ DOWN_RIGHT = 'dr'
 DOWN_LEFT = 'dl'
 DIRECTIONS = (UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT)
 
-# Key names for logo dictionaries.
+# Key names for dictionaries.
 COLOR = 'color'
 X = 'x'
 Y= 'y'
@@ -47,6 +50,12 @@ DIR = 'direction'
 
 def main():
     bext.clear()
+
+    # Generate some chains
+    digital_rain = []
+    for i in range(NUMBER_OF_RAINDROPS):
+            digital_rain.append({COLOR: random.choice(COLORS)},
+                                )
 
     # Generate some logos.
     logos = []
