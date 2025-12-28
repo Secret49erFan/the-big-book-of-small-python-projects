@@ -47,16 +47,23 @@ COLOR = 'color'
 X = 'x'
 Y= 'y'
 DIR = 'direction'
+GLYPH = 'glyph'
+GLYPHS = [chr(uni_code) for uni_code in range(ord('a'), ord('z') + 1)]
 
 def main():
     bext.clear()
 
-    # Generate some chains
-    digital_rain = []
-    for i in range(NUMBER_OF_RAINDROPS):
-            digital_rain.append({COLOR: random.choice(COLORS)},
-                                )
-
+    # Generate a drop
+    drop = []
+    trail = 1
+    anchor = random.randint(1, WIDTH - 1)
+    for i in range(random.randint(7, 15)):
+        drop.append({COLOR: COLORS[1], # Green.
+                             X: anchor,
+                             Y: trail,
+                             GLYPH: random.choice(GLYPHS),})
+        trail += 1
+    
     # Generate some logos.
     logos = []
     for i in range(NUMBER_OF_LOGOS):
