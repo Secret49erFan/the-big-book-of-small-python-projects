@@ -77,6 +77,18 @@ def main():
     
     corner_bounces = 0 # Count how many times a logo hits a corner
     while True: # Main program loop.
+        for glyph in drop: # Handle each glyph in the drop list.
+            # Erase the logo's current location.
+            bext.goto(glyph[X], glyph[Y])
+            print(' ')
+
+            # Make it rain. Move the glyph down.
+            glyph[Y] += 1
+            
+            # Moves the glyph to the top of the terminal.
+            if glyph[Y] >= HEIGHT:
+                glyph[Y] = 1
+
         for logo in logos: # Handle each logo in the logos list.
             # Erase the logo's current location.
             bext.goto(logo[X], logo[Y])
@@ -146,6 +158,11 @@ def main():
         bext.goto(5, 0)
         bext.fg('white')
         print(f'Corner bounces: {corner_bounces}', end='')
+
+        for glyph in drop:
+            bext.goto(glyph[X], glyph[Y])
+            bext.fg(glyph[COLOR])
+            print(glyph[GLYPH])
 
         for logo in logos:
             # Draw the logos a their new location.
