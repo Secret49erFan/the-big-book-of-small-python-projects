@@ -30,11 +30,12 @@ if WIDTH % 2 == 0:
 
 NUMBER_OF_LOGOS = 5
 
-NUMBER_OF_RAINDROPS = 7
+NUMBER_OF_RAINDROPS = 175
 
 PAUSE_AMOUNT = 0.2
 
-COLORS = ['red', 'green', 'yellow', 'blue', 'magenta', 'cyan', 'white']
+COLORS = ['black', 'red', 'green', 'yellow', 'blue', 'purple', 'cyan', 'white']
+GRADIENT = ['white', 'yellow', 'green', 'black']
 
 UP_RIGHT = 'ur'
 UP_LEFT = 'ul'
@@ -46,23 +47,28 @@ DIRECTIONS = (UP_RIGHT, UP_LEFT, DOWN_RIGHT, DOWN_LEFT)
 COLOR = 'color'
 X = 'x'
 Y= 'y'
+
 DIR = 'direction'
 GLYPH = 'glyph'
-GLYPHS = [chr(uni_code) for uni_code in range(ord('a'), ord('z') + 1)]
+GLYPHS = ([chr(alpha_code) for alpha_code in range(ord('a'), ord('z') + 1)] +
+          [chr(numeric_code) for numeric_code in range(ord('0'), ord('9') + 1)])
 
 def main():
     bext.clear()
 
     # Generate a drop
-    drop = []
-    trail = 1
-    anchor = random.randint(1, WIDTH - 1)
-    for i in range(random.randint(7, 15)):
-        drop.append({COLOR: COLORS[1], # Green.
-                             X: anchor,
-                             Y: trail,
-                             GLYPH: random.choice(GLYPHS),})
-        trail += 1
+    digital_rain = []
+    for _ in range(NUMBER_OF_RAINDROPS):
+        drop = []
+        trail = 1
+        anchor = random.randint(1, WIDTH - 1)
+        for i in range(random.randint(7, 25)):
+            drop.append({COLOR: COLORS[0], # Green.
+                         X: anchor,
+                         Y: trail,
+                         GLYPH: random.choice(GLYPHS),})
+            trail += 1
+        digital_rain.append(drop)
     
     # Generate some logos.
     logos = []
@@ -77,17 +83,18 @@ def main():
     
     corner_bounces = 0 # Count how many times a logo hits a corner
     while True: # Main program loop.
-        for glyph in drop: # Handle each glyph in the drop list.
-            # Erase the logo's current location.
-            bext.goto(glyph[X], glyph[Y])
-            print(' ')
+        for drops in digital_rain: # Handle each drop in digital_rain list.
+            for glyph in drops: # Handle each glyph in the drop list.
+                # Erase the glyph's current location.
+                bext.goto(glyph[X], glyph[Y])
+                print(' ', end='')
 
-            # Make it rain. Move the glyph down.
-            glyph[Y] += 1
+                # Make it rain. Move the glyph down.
+                glyph[Y] += 1
             
-            # Moves the glyph to the top of the terminal.
-            if glyph[Y] >= HEIGHT:
-                glyph[Y] = 1
+                # Moves the glyph to the top of the terminal.
+                if glyph[Y] >= HEIGHT:
+                    glyph[Y] = 1
 
         for logo in logos: # Handle each logo in the logos list.
             # Erase the logo's current location.
@@ -156,19 +163,32 @@ def main():
             
             # Display number of corner bounces.
         bext.goto(5, 0)
-        bext.fg('white')
+        bext.fg('blue')
         print(f'Corner bounces: {corner_bounces}', end='')
 
-        for glyph in drop:
-            bext.goto(glyph[X], glyph[Y])
-            bext.fg(glyph[COLOR])
-            print(glyph[GLYPH])
+        for drops in digital_rain:
+            num_of_glyphs = len(drops)
+#            quotient = max(1, (num_of_glyphs - 1) // 4)
+            
 
-        for logo in logos:
-            # Draw the logos a their new location.
-            bext.goto(logo[X], logo[Y])
-            bext.fg(logo[COLOR])
-            print('DvD', end='')
+            for glyph_pos, glyph in enumerate(reversed(drops)):
+                bext.goto(glyph[X], glyph[Y])
+                if glyph_pos == 0:
+                    bext.fg(GRADIENT[0])
+                elif glyph_pos < num_of_glyphs * 0.15:
+                    bext.fg(GRADIENT[1])
+                elif glyph_pos < num_of_glyphs * 0.85:
+                    bext.fg(GRADIENT[2])
+                else:
+                    bext.fg(GRADIENT[3])
+
+                print(glyph[GLYPH], end='')
+
+#        for logo in logos:
+#            # Draw the logos a their new location.
+#            bext.goto(logo[X], logo[Y])
+#            bext.fg(logo[COLOR])
+#            print('DvD', end='')
             
         bext.goto(0, 0)
 

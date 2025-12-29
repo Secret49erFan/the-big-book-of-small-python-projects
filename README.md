@@ -23,5 +23,6 @@ This is where I'm stashing all the code snippets from the book.
     -> Changed variable names to snake_case.
 ## Bouncing DvD
     -> Added f-strings.
+    -> Added effect: Digital Rain (The Matrix)
     -> Changed variable names to snake_case.
     -> Fixed boudry logic
