@@ -26,3 +26,6 @@ This is where I'm stashing all the code snippets from the book.
     -> Added effect: Digital Rain (The Matrix)
     -> Changed variable names to snake_case.
     -> Fixed boudry logic
+
+## Caesar Cipher
+    -> Added f-strings.

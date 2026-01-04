@@ -90,7 +90,7 @@ def main():
                 print(' ', end='')
 
                 # Make it rain. Move the glyph down.
-                glyph[Y] += 1
+#                glyph[Y] += 1
             
                 # Moves the glyph to the top of the terminal.
                 if glyph[Y] >= HEIGHT:
