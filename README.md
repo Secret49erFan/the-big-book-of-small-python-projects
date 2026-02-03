@@ -30,3 +30,7 @@ This is where I'm stashing all the code snippets from the book.
 ## Caesar Cipher
     -> Added f-strings.
     -> Changed variable names to snake_case.
+ 
+## Caesar Hacker
+    -> Added f-strings.
+    -> Changed variable names to snake_case.
