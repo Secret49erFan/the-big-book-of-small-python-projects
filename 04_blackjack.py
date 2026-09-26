@@ -68,8 +68,9 @@ def main():
         if dealer_has_blackjack:
             if side_bet > 0:
                 money += side_bet * 2 # 2:1 payout
-            # Handle the main bet loss
-            money -= bet
+            # Lose the main bet only if the player doesn't also have blackjack.
+            if get_hand_value(player_hand) != 21:
+                money -= bet
             continue
 
         # Handle player actions.

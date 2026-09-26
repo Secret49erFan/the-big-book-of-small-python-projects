@@ -99,7 +99,7 @@ def generate_dont_want_you_know_headline():
 
 
 def generate_gift_idea_headline():
-    number = random.randin1000t(7, 15)
+    number = random.randint(7, 15)
     noun = random.choice(NOUNS)
     state = random.choice(STATES)
     return f"{number} Gift Ideas to Give Your {noun} From {state}"
